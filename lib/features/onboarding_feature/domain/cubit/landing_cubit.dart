@@ -1,13 +1,13 @@
 import 'package:sarmad_task/core/extensions/task_excuter.dart';
-import 'package:sarmad_task/features/onboarding_feature/domain/use_case/landing_use_case.dart';
 
 import '../../../../file_export.dart';
 import '../../data/models/user_individual_model.dart';
+import '../../data/repo/landing_repo.dart';
 
 part 'landing_state.dart';
 
 class LandingCubit extends Cubit<LandingState> {
-  LandingCubit(this._landingUseCase) : super(LandingInitial());
+  LandingCubit(this._landingRepo) : super(LandingInitial());
 
   bool listView = false;
   String? firstName;
@@ -16,7 +16,7 @@ class LandingCubit extends Cubit<LandingState> {
   final searchUserFormKey = GlobalKey<FormState>();
 
   List<UserIndividualModel> listOfUserIndividual = [];
-  final LandingUseCase _landingUseCase;
+  final LandingRepo _landingRepo;
 
   final ScrollController scrollController = ScrollController();
   final _chunkSize = 10;
@@ -52,7 +52,7 @@ class LandingCubit extends Cubit<LandingState> {
 
   Future<void> searchUserIndividual(UserIndividualModel individualModel) async {
     emit(LandingLoading());
-    var result = _landingUseCase.searchForIndividual(individualModel);
+    var result = _landingRepo.getIndividual(individualModel);
     await result.execute(
       onFailed: (failed) => emit(LandingError(errorMessage: failed.message)),
       onSuccess: (value) {

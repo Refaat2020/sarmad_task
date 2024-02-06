@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sarmad_task/features/onboarding_feature/domain/use_case/landing_use_case.dart';
+import 'package:sarmad_task/features/onboarding_feature/data/repo/landing_repo.dart';
 
 import 'core/config/app_route.dart';
 import 'core/config/observer.dart';
@@ -17,7 +17,7 @@ void main() async {
   setupLocator();
   runApp(MultiBlocProvider(providers: [
     BlocProvider<LandingCubit>(
-      create: (context) => LandingCubit(locator<LandingUseCase>()),
+      create: (context) => LandingCubit(locator<LandingRepo>()),
     )
   ], child: const MyApp()));
 }
