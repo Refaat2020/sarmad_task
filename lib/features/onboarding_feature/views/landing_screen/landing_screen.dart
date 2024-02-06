@@ -30,11 +30,12 @@ class _LandingScreenState extends State<LandingScreen> {
         title: Text("Search for individual",
             style: Theme.of(context).textTheme.displayMedium),
         actions: [
-          IconButton(
-              onPressed: () {
-                userIndividualModel.changeView();
-              },
-              icon: const Icon(Icons.menu))
+          if (userIndividualModel.listOfUserIndividual.isNotEmpty)
+            IconButton(
+                onPressed: () {
+                  userIndividualModel.changeView();
+                },
+                icon: const Icon(Icons.menu))
         ],
       ),
       body: SingleChildScrollView(
